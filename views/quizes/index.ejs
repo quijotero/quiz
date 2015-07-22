@@ -1,5 +1,32 @@
+  
+  <div>
+  <form method="get" action="/quizes">        
+    Introduce filtrado: <p>
+    <input type="text" id="search" name="search" value="<%= filtrado %>"/>
+    <input type="submit" value="Filtrar">
+  </form>
+  </div>
+  <div>
   <table>
   <% var i; for (i=0; i < quizes.length; i++) { %>        
      <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr> 
   <% } %>
   </table>
+  </div>
+  <script type="text/javascript">
+    //Funcion para deshabilitar el botón de enviar formulario si no hay nada escrito
+    $(document).ready(function(){
+     if($('#search').val() == '') {
+         $('input[type="submit"]').attr('disabled','disabled');
+     }
+     else {
+       $('input[type="submit"]').removeAttr('disabled');
+     }
+     $('input[type="text"]').keypress(function(){
+            if($(this).val() != ''){
+               $('input[type="submit"]').removeAttr('disabled');
+            }
+     });
+    });
+  </script>
+
